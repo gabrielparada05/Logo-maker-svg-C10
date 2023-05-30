@@ -6,8 +6,52 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const { Triangle, Square, Circle } = require('./lib/shapes.js');
 
+// funct
+
+// function isValidColor(fill) {
+//   // Regular expression to match valid color names
+//   const colorNameRegex = /^(red|green|blue|yellow|magenta|cyan)$/i;
+
+//   // Regular expression to match valid hexadecimal color codes
+//   const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+
+//   // Check if the color matches either color names or hexadecimal format
+//   return colorNameRegex.test(fill) || hexColorRegex.test(fill);
+// }
+
+// // if (!isValidColor(fill)) {
+// //   throw new Error('Invalid color');
+// // }
+
+
+
+// function isValidColor(textColor) {
+//   // Regular expression to match valid color names
+//   const colorNameRegex = /^(red|green|blue|yellow|magenta|cyan)$/i;
+// console.log('hello')
+//   // Regular expression to match valid hexadecimal color codes
+//   const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  
+  
+//   if (colorNameRegex.test(textColor) || hexColorRegex.test) {
+//     //throw new Error('Invalid color');
+//     return true;
+//   } else {
+//     return false
+//   }
+  
+// }
+
+
+ 
+
+
 
 /// Questions 
+
+
+
+
 
 inquirer
   .prompt([
@@ -28,7 +72,7 @@ inquirer
       name: 'textColor',
       validate: function (answer) {
         if (answer.length === 0) {
-          return console.log("Write one!");
+          return console.log("Write one valid!");
         }
         return true;
     }
