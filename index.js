@@ -4,11 +4,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const Square = require('./lib/shapes.js');
-const Triangle = require('./lib/shapes.js');
-const Circle = require('./lib/shapes.js');
-
-
+const { Triangle, Square, Circle } = require('./lib/shapes.js');
 
 
 /// Questions 
@@ -73,11 +69,14 @@ inquirer
     let patternChoice = response.pattern  
 
     if (patternChoice === "Triangle") {
-       svgCode = new Triangle(0,0,`${response.patternColor}`, `${response.patternColor}`,5, `${response.text}`, `${response.textColor}`, 50, 20, 100, 100, 10, 100).render();
+       let shape1 = new Triangle(0,0,`${response.patternColor}`, `${response.patternColor}`,5, `${response.text}`, `${response.textColor}`, 50, 20, 100, 100, 10, 100);
+       svgCode = shape1.render()
     } else if (patternChoice  === "Square") {
-       svgCode = new Square(10, 10, `${response.patternColor}`, `${response.patternColor}`, 5, `${response.text}`, `${response.textColor}`, 50, 50).render();
+       let shape2 = new Square(10, 10, `${response.patternColor}`, `${response.patternColor}`, 5, `${response.text}`, `${response.textColor}`, 50, 50);
+       svgCode = shape2.render();
     } else if  (patternChoice === "Circle")  {
-       svgCode = new Circle(0, 0, `${response.patternColor}`, `${response.patternColor}`, 3, `${response.text}`, `${response.textColor}`, 30, 50, 50).render();
+       let shape3 = new Circle(0, 0, `${response.patternColor}`, `${response.patternColor}`, 3, `${response.text}`, `${response.textColor}`, 30, 50, 50);
+       svgCode = shape3.render();
     } else {
       console.log("Invalid pattern")
     }
