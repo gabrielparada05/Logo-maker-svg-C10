@@ -1,58 +1,10 @@
-
-
-
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Triangle, Square, Circle } = require('./lib/shapes.js');
 
-// funct
-
-// function isValidColor(fill) {
-//   // Regular expression to match valid color names
-//   const colorNameRegex = /^(red|green|blue|yellow|magenta|cyan)$/i;
-
-//   // Regular expression to match valid hexadecimal color codes
-//   const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-
-//   // Check if the color matches either color names or hexadecimal format
-//   return colorNameRegex.test(fill) || hexColorRegex.test(fill);
-// }
-
-// // if (!isValidColor(fill)) {
-// //   throw new Error('Invalid color');
-// // }
-
-
-
-// function isValidColor(textColor) {
-//   // Regular expression to match valid color names
-//   const colorNameRegex = /^(red|green|blue|yellow|magenta|cyan)$/i;
-// console.log('hello')
-//   // Regular expression to match valid hexadecimal color codes
-//   const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-  
-  
-//   if (colorNameRegex.test(textColor) || hexColorRegex.test) {
-//     //throw new Error('Invalid color');
-//     return true;
-//   } else {
-//     return false
-//   }
-  
-// }
-
-
- 
-
-
 
 /// Questions 
-
-
-
-
-
 inquirer
   .prompt([
     {
@@ -68,7 +20,7 @@ inquirer
     },
     {
       type: 'input',
-      message: 'What color of fonts do you want? Ex: Blue, White, Red or the hexadecimal number',
+      message: 'What color of fonts do you want? Use lowercase. Ex: blue, white, red or the hexadecimal number',
       name: 'textColor',
       validate: function (answer) {
         if (answer.length === 0) {
@@ -93,7 +45,7 @@ inquirer
     ,
     {
       type: 'input',
-      message: 'What color of shape do you want? Ex: Blue, White, Red or the hexadecimal number',
+      message: 'What color of shape do you want? Use lowercase. Ex: blue, white, red or the hexadecimal number',
       name: 'patternColor',
       validate: function (answer) {
         if (answer.length === 0) {
@@ -106,27 +58,51 @@ inquirer
 
   ///generate response and print the svg file
   .then((response) => {
-    
-    console.log(response);
-    
+
+    // // validation to prevent a wrong color in shape  https://www.geeksforgeeks.org/how-to-validate-hexadecimal-color-code-using-regular-expression/
+    // convert in lowercase to prevent error generating the color
+    let textColor = response.textColor.toLowerCase()
+    let shapeColor = response.patternColor.toLowerCase()
+
+
+    function isValidColor(textColor, shapeColor) {
+          // to match valid color names
+          const colorNameRegex = /^(red|green|blue|yellow|magenta|cyan|black|white|gray|brown|orange|pink|purple|violet|indigo|turquoise|olive|lime|gold|silver|navy|maroon|coral|lavender|plum|orchid|peach|sienna|slate|tan|tomato|chocolate|firebrick|forest|khaki|midnight)$/i;
+        
+          // match valid hexadecimal color codes
+          const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        
+          //  matches either color names or hexadecimal format
+          return colorNameRegex.test(textColor, shapeColor) || hexColorRegex.test(textColor, shapeColor);
+        }
+      
+        if (!isValidColor(shapeColor)) {
+          throw new Error('Invalid color selected for shape');
+        }
+
+        if (!isValidColor(textColor)) {
+          throw new Error('Invalid color selected for text');
+        }
+
+        isValidColor(textColor, shapeColor)
+
+     
     let svgCode = "";
     let patternChoice = response.pattern  
-
+// if statement to pick shape 
     if (patternChoice === "Triangle") {
-       let shape1 = new Triangle(0,0,`${response.patternColor}`, `${response.patternColor}`,5, `${response.text}`, `${response.textColor}`, 50, 20, 100, 100, 10, 100);
+       let shape1 = new Triangle(0,0,`${shapeColor}`, `${shapeColor}`,5, `${response.text}`, `${textColor}`, 50, 20, 100, 100, 10, 100);
        svgCode = shape1.render()
     } else if (patternChoice  === "Square") {
-       let shape2 = new Square(10, 10, `${response.patternColor}`, `${response.patternColor}`, 5, `${response.text}`, `${response.textColor}`, 50, 50);
+       let shape2 = new Square(10, 10, `${shapeColor}`, `${shapeColor}`, 5, `${response.text}`, `${textColor}`, 50, 50);
        svgCode = shape2.render();
     } else if  (patternChoice === "Circle")  {
-       let shape3 = new Circle(0, 0, `${response.patternColor}`, `${response.patternColor}`, 3, `${response.text}`, `${response.textColor}`, 30, 50, 50);
+       let shape3 = new Circle(0, 0, `${shapeColor}`, `${shapeColor}`, 3, `${response.text}`, `${textColor}`, 30, 50, 50);
        svgCode = shape3.render();
     } else {
       console.log("Invalid pattern")
     }
-   
   
-    console.log(svgCode)
    
   
     ///print  
