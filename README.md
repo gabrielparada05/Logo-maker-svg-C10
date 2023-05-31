@@ -64,7 +64,7 @@ Jest
 [License: GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Test
-To test the functionality of the module, you can use the Jest testing framework. Import the shapes.js module and write test cases to ensure that the shapes are rendered correctly with the desired colors and text. 
+To test the functionality, you can use the Jest testing framework. Import the shapes.js module and write test cases to ensure that the shapes are rendered correctly with the desired colors and text. 
 
 ## How to Contribute  
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue on https://github.com/gabrielparada05/Logo-maker-svg-C10.
